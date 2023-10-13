@@ -1,4 +1,4 @@
-import { cn } from "@/components/utils/lib";
+import { cn } from "@/utils/lib";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
@@ -10,9 +10,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "bitshrt - make your urls a bit short",
+  title: "BitShrt - Make your URLs a bit short",
   description:
-    "Bitshrt is a URL Shortner that acts a powerfull marketing tool that helps you track your customer details such as location, language, user device type etc",
+    "BitShrt is a URL Shortner that acts a powerfull marketing tool that helps you track your customer details such as location, language, user device type and a lot more.",
 
   // Favicons
   icons: {
