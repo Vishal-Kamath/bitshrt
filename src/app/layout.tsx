@@ -2,6 +2,7 @@ import { cn } from "@/utils/lib";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
+import AuthProvider from "@/components/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--inter-font" });
 const montserrat = Montserrat({
@@ -12,7 +13,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "BitShrt - Make your URLs a bit short",
   description:
-    "BitShrt is a URL Shortner that acts a powerfull marketing tool that helps you track your customer details such as location, language, user device type and a lot more.",
+    "BitShrt is a URL Shortner that acts as a powerfull marketing tool that helps you track your customer details such as location, language, user device type and a lot more.",
 
   // Favicons
   icons: {
@@ -104,9 +105,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.variable, montserrat.variable, "relative")}>
-        {children}
-      </body>
+      <AuthProvider>
+        <body className={cn(inter.variable, montserrat.variable, "relative")}>
+          {children}
+        </body>
+      </AuthProvider>
     </html>
   );
 }
