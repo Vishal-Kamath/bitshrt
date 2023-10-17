@@ -22,7 +22,7 @@ const UIInput: FC<Props> = ({
         id={id}
         value={value}
         type={type || "text"}
-        className="peer h-full w-full rounded-md border-1 border-gray-400 bg-transparent px-3 outline-none outline-offset-0 hover:outline hover:outline-4 hover:outline-gray-200 focus:border-black"
+        className="peer h-full w-full rounded-md border-1 border-gray-400 bg-transparent px-3 outline-none outline-offset-0 hover:outline hover:outline-4 hover:outline-gray-200/50 focus:border-black"
         {...props}
       />
       {placeholder && (

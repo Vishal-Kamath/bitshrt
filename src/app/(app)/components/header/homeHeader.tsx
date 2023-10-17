@@ -19,11 +19,11 @@ const HomeHeader: FC = () => {
 
       <div className="flex gap-6 items-center">
         <Link href="/auth/signup">
-          <UIButton variant="text" className="px-6">
+          <UIButton variant="text" className="px-6 rounded-full">
             Sign up
           </UIButton>
         </Link>
-        <UIButton variant="outlined" className="rounded-full">
+        <UIButton variant="rose-outlined" className="rounded-full">
           Get Started
         </UIButton>
       </div>

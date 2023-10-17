@@ -1,10 +1,11 @@
 import { AuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, or } from "drizzle-orm";
 import bcrypt from "bcrypt";
+import { v4 as uuid } from "uuid";
 
 export const options: AuthOptions = {
   pages: {
@@ -14,6 +15,13 @@ export const options: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -21,7 +29,7 @@ export const options: AuthOptions = {
         email: {
           label: "Email",
           type: "text",
-          placeholder: "username",
+          placeholder: "email",
         },
         password: { label: "Password", type: "password" },
       },
@@ -54,5 +62,39 @@ export const options: AuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    session: async ({ session }) => {
+      console.log(session);
+      const user = (
+        await db
+          .select()
+          .from(users)
+          .where(
+            or(
+              eq(users.name, session.user.name),
+              eq(users.email, session.user.email)
+            )
+          )
+      )[0];
+      if (user) {
+        // set image
+        if (!user.image)
+          await db
+            .update(users)
+            .set({ image: session.user.image })
+            .where(eq(users.name, session.user.name));
+
+        session.user.id = user.id;
+        session.user.name = user.name;
+        session.user.email = user.email;
+        session.user.password = user.password;
+        session.user.image = user.image;
+      }
+      return session;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
   secret: process.env.NEXTAUTH_SECRET,
 };

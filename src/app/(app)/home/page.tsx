@@ -19,13 +19,13 @@ export default function Home() {
         </p>
         <div className="flex gap-3 text-sm mt-6">
           <UIButton
-            variant="outlined"
+            variant="rose-outlined"
             className="rounded-full flex gap-3 items-center group"
           >
             <span>Get Started</span>
             <UIArrow className="text-gray-600 group-hover:text-black" />
           </UIButton>
-          <UIButton variant="text" className="px-6">
+          <UIButton variant="text" className="px-6 rounded-full">
             Guide
           </UIButton>
         </div>
