@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import UIButton from "../ui/button";
+import UIButton from "@/components/ui/button";
 
 const HomeHeader: FC = () => {
   return (
