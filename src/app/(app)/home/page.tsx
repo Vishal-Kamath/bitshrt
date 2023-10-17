@@ -1,6 +1,6 @@
-import HomeHeader from "@/components/header/homeHeader";
 import UIArrow from "@/components/ui/arrow";
 import UIButton from "@/components/ui/button";
+import HomeHeader from "../components/header/homeHeader";
 
 export default function Home() {
   return (
