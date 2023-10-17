@@ -18,9 +18,9 @@ const HomeHeader: FC = () => {
       </Link>
 
       <div className="flex gap-6 items-center">
-        <Link href="/auth/signup">
+        <Link href="/auth/signin">
           <UIButton variant="text" className="px-6 rounded-full">
-            Sign up
+            Sign In
           </UIButton>
         </Link>
         <UIButton variant="rose-outlined" className="rounded-full">

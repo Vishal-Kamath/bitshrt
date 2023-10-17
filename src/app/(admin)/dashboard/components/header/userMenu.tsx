@@ -6,8 +6,9 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, ReactNode, useEffect, useState } from "react";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
+import { LuLayoutDashboard } from "react-icons/lu";
 
 interface Props {
   session: Session;
@@ -52,6 +53,22 @@ const UserMenu: FC<Props> = ({ session }) => {
           <DropDownElement
             value={
               <>
+                <LuLayoutDashboard /> <span>Dashboard</span>
+              </>
+            }
+            action="/dashboard"
+          />
+          <DropDownElement
+            value={
+              <>
+                <AiOutlineSetting /> <span>Settings</span>
+              </>
+            }
+            action="/dashboard/settings"
+          />
+          <DropDownElement
+            value={
+              <>
                 <MdOutlineLogout /> <span>Logout</span>
               </>
             }
@@ -76,7 +93,7 @@ const DropDownElement: FC<DropDownProps> = ({ value, action, className }) => {
     <Link
       href={action}
       className={cn(
-        "p-2 flex gap-2 items-center text-sm font-light justify-start w-full border-1 rounded-md last:border-none border-gray-200",
+        "p-2 flex gap-2 items-center hover:bg-gray-100 text-sm font-light justify-start w-full rounded-md",
         className
       )}
     >
@@ -86,7 +103,7 @@ const DropDownElement: FC<DropDownProps> = ({ value, action, className }) => {
     <button
       onClick={action}
       className={cn(
-        "p-2 flex gap-2 items-center text-sm font-light justify-start w-full border-1 rounded-md last:border-none border-gray-200",
+        "p-2 flex gap-2 items-center hover:bg-gray-100 text-sm font-light justify-start w-full rounded-md",
         className
       )}
     >
