@@ -25,3 +25,28 @@ export const users = mysqlTable("users", {
 });
 
 export type DrizzleUser = typeof users.$inferSelect;
+
+// -------------------------------------------------
+// Link
+// -------------------------------------------------
+export const links = mysqlTable("links", {
+  id: varchar("id", { length: 36 }).notNull().primaryKey(),
+  userId: varchar("userId", { length: 36 })
+    .notNull()
+    .references(() => users.id),
+  key: varchar("key", { length: 6 }).notNull().unique(),
+  url: text("url").notNull(),
+
+  created_at: timestamp("createdAt").defaultNow(),
+  updated_at: timestamp("updatedAt").onUpdateNow(),
+});
+
+export type DrizzleLink = typeof links.$inferSelect;
+
+// -------------------------------------------------
+// Log
+// -------------------------------------------------
+// const logs = mysqlTable("logs", {
+//   id: varchar("id", { length: 36 }).notNull().primaryKey(),
+//   linkId: varchar("linkId", { length: 36 }).notNull().references(() => links.id),
+// })

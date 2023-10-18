@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, ReactNode, useEffect, useState } from "react";
-import { AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineLink, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
 import { MdOutlineLogout } from "react-icons/md";
 import { LuLayoutDashboard } from "react-icons/lu";
 
@@ -26,7 +26,7 @@ const UserMenu: FC<Props> = ({ session }) => {
   }, [openDropdown]);
 
   return (
-    <div className="relative">
+    <div className="relative isolate">
       <button
         onClick={() => setOpenDropdown((open) => !open)}
         className="h-9 w-9 relative isolate bg-gray-100 rounded-full overflow-hidden"
@@ -57,6 +57,14 @@ const UserMenu: FC<Props> = ({ session }) => {
               </>
             }
             action="/dashboard"
+          />
+          <DropDownElement
+            value={
+              <>
+                <AiOutlineLink /> <span>Links</span>
+              </>
+            }
+            action="/dashboard/links"
           />
           <DropDownElement
             value={
