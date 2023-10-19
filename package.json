@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npm run push:mysql & next start",
     "lint": "next lint",
     "push:mysql": "drizzle-kit push:mysql",
     "studio": "drizzle-kit studio --host 127.0.0.1"

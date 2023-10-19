@@ -29,6 +29,7 @@ const UIInput2: FC<Props> = ({
           "border-1 h-9 px-3 font-normal border-gray-400 rounded-md outline-none outline-offset-0 hover:outline hover:outline-4 hover:outline-gray-200/50 group-focus-within:border-gray-900",
           className
         )}
+        {...props}
       />
     </div>
   );

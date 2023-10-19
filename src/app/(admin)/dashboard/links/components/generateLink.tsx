@@ -2,14 +2,14 @@
 
 import UIButton from "@/components/ui/button";
 import UIInput2 from "@/components/ui/input2";
-import useModal from "@/hooks/useModal";
+import Modal from "@/components/ui/modal";
 import axios from "axios";
 import { FC, useState } from "react";
 
-const GenerateLink: FC = () => {
+const GenerateLink: FC<{ fetchLinks: VoidFunction }> = ({ fetchLinks }) => {
   const [key, setKey] = useState("");
   const [url, setUrl] = useState("");
-  const [openModal, Modal] = useModal();
+  const [open, setOpen] = useState(false);
 
   const _submit = async () => {
     await axios
@@ -28,6 +28,8 @@ const GenerateLink: FC = () => {
       )
       .then((res) => {
         console.log(res);
+        fetchLinks();
+        setOpen(false);
       })
       .catch((err) => {
         console.log(err);
@@ -36,10 +38,14 @@ const GenerateLink: FC = () => {
 
   return (
     <>
-      <UIButton onClick={openModal} variant="outlined">
+      <UIButton onClick={() => setOpen(true)} variant="outlined">
         Generate
       </UIButton>
-      <Modal className="p-5 flex flex-col gap-3 w-full max-w-xl pt-12">
+      <Modal
+        className="p-5 flex flex-col gap-3 w-full max-w-xl pt-12"
+        open={open}
+        closeModal={() => setOpen(false)}
+      >
         <UIInput2
           id="url"
           value={url}

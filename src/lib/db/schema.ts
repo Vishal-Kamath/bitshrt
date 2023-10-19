@@ -46,7 +46,22 @@ export type DrizzleLink = typeof links.$inferSelect;
 // -------------------------------------------------
 // Log
 // -------------------------------------------------
-// const logs = mysqlTable("logs", {
-//   id: varchar("id", { length: 36 }).notNull().primaryKey(),
-//   linkId: varchar("linkId", { length: 36 }).notNull().references(() => links.id),
-// })
+export const logs = mysqlTable("logs", {
+  id: varchar("id", { length: 36 }).notNull().primaryKey(),
+  linkId: varchar("linkId", { length: 36 })
+    .notNull()
+    .references(() => links.id),
+  city: varchar("city", { length: 50 }).notNull(),
+  country: varchar("country", { length: 2 }).notNull(),
+  region: varchar("region", { length: 10 }).notNull(),
+  latitude: varchar("latitude", { length: 10 }).notNull(),
+  longitude: varchar("longitude", { length: 10 }).notNull(),
+
+  // UA
+  browser: varchar("browser", { length: 20 }).notNull(),
+  os: varchar("os", { length: 20 }).notNull(),
+
+  created_at: timestamp("createdAt").defaultNow(),
+  updated_at: timestamp("updatedAt").onUpdateNow(),
+});
+export type DrizzleLog = typeof logs.$inferSelect;

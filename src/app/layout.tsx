@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import AuthProvider from "@/components/providers/AuthProvider";
 import ReduxProvider from "@/components/providers/reduxProvider";
-import Modal from "@/components/ui/modal";
 
 const inter = Inter({ subsets: ["latin"], variable: "--inter-font" });
 const montserrat = Montserrat({
@@ -110,7 +109,6 @@ export default function RootLayout({
       <AuthProvider>
         <ReduxProvider>
           <body className={cn(inter.variable, montserrat.variable, "relative")}>
-            <Modal />
             {children}
           </body>
         </ReduxProvider>

@@ -1,27 +1,20 @@
 "use client";
 
-import {
-  closeModal,
-  selectModalChildren,
-  selectModalClassName,
-  selectModalOpen,
-} from "@/redux/slice/modal";
-import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 import { cn } from "@/utils/lib";
-import { FC } from "react";
+import { FC, HTMLAttributes } from "react";
 import { RxCross2 } from "react-icons/rx";
 
-const Modal: FC = () => {
-  const dispatch = useAppDispatch();
-
-  const open = useAppSelector(selectModalOpen);
-  const children = useAppSelector(selectModalChildren);
-  const className = useAppSelector(selectModalClassName);
-
-  const closeModelOnClick = () => {
-    dispatch(closeModal());
-  };
-
+interface Props extends HTMLAttributes<HTMLDivElement> {
+  open: boolean;
+  closeModal: VoidFunction;
+}
+const Modal: FC<Props> = ({
+  open,
+  className,
+  closeModal,
+  children,
+  ...props
+}) => {
   return open ? (
     <div className="z-50 absolute flex justify-center items-center px-vw top-0 left-0 min-h-screen h-full w-full bg-gray-400 bg-opacity-20 backdrop-blur-md">
       <div
@@ -31,7 +24,7 @@ const Modal: FC = () => {
         )}
       >
         <button
-          onClick={closeModelOnClick}
+          onClick={closeModal}
           className="absolute rounded-full top-3 right-3 flex justify-center items-center hover:bg-gray-100 text-gray-500 h-8 w-8"
         >
           <RxCross2 className="h-4 w-4" />

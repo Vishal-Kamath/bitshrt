@@ -66,6 +66,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const body = await req.json();
+  const { key, url } = body;
   const token = await getToken({ req });
   if (!token || !token.email) {
     return NextResponse.json(
@@ -79,9 +81,6 @@ export async function POST(req: NextRequest) {
     );
   }
   try {
-    const body = await req.json();
-    const { key, url } = body;
-
     const user = (
       await db
         .select({ id: users.id })

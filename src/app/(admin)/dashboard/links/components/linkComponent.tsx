@@ -8,20 +8,20 @@ import { cn } from "@/utils/lib";
 import { dateFormater } from "@/utils/dateFormater";
 
 const LinkComponent: FC<{ link: DrizzleLink }> = ({ link }) => {
-  const endpoint = process.env.VERCEL
+  const endpoint = process.env.VERCEL_URL
     ? "https://bitshrt.vercel.app"
     : "http://localhost:3000";
 
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(`${endpoint}/${link.key}`);
+    navigator.clipboard.writeText(`${endpoint}/bit/${link.key}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
   };
 
   return (
-    <div className="bg-white rounded-lg border-1 border-gray-200 flex shadow-md p-6 gap-6">
+    <div className="bg-white leading-none rounded-lg border-1 border-gray-200 flex shadow-md px-4 py-6 gap-4">
       <Image
         src="/assets/logo.svg"
         alt="Bitshrt"
@@ -33,7 +33,7 @@ const LinkComponent: FC<{ link: DrizzleLink }> = ({ link }) => {
       <div className="flex flex-col justify-between">
         <div className="flex gap-3 items-center">
           <h3 className="text-blue-600 font-semibold">
-            {endpoint}/{link.key}
+            {endpoint}/bit/{link.key}
           </h3>
           <button
             className={cn(
@@ -56,6 +56,10 @@ const LinkComponent: FC<{ link: DrizzleLink }> = ({ link }) => {
           <span className="text-gray-600">{link.url}</span>
         </div>
       </div>
+
+      <Link href={`/dashboard/links/${link.id}`} className="ml-auto">
+        View More
+      </Link>
     </div>
   );
 };
