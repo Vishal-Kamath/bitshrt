@@ -58,7 +58,7 @@ const SignInPage: FC = () => {
           <div className="flex flex-col gap-1">
             <h2 className="font-medium text-lg">Sign In</h2>
             <p className="text-gray-500 text-sm">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link
                 href="/auth/signup"
                 className="text-blue-400 hover:text-blue-700 underline"
