@@ -21,6 +21,8 @@ const analyse = async (link: DrizzleLink, req: NextRequest) => {
     browser: ua.browser.name || "Unknown",
     os: ua.os.name || "Unknown",
   });
+
+  return;
 };
 
 export default analyse;

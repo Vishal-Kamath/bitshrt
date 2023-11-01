@@ -12,7 +12,7 @@ export const GET = async (req: NextRequest) => {
   )[0];
 
   if (!link) return NextResponse.json({ link, parse });
-  analyse(link, req);
+  await analyse(link, req);
 
   return NextResponse.redirect(link.url);
 };
