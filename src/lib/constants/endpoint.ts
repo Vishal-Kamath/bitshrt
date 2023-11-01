@@ -1,3 +1,4 @@
-export const endpoint = process.env.VERCEL
-  ? "https://bitshrt.vercel.app"
-  : "http://localhost:3000";
+export const endpoint =
+  process.env.NODE_ENV === "production"
+    ? "https://bitshrt.vercel.app"
+    : "http://localhost:3000";

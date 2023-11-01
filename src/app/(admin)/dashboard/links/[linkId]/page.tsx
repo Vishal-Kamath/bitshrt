@@ -16,7 +16,7 @@ const LinkDetailPage: FC = () => {
   const getLinkData = async (linkId: string) => {
     await axios
       .get<{ link: DrizzleLink; linkLogs: DrizzleLog[] }>(
-        `${endpoint}/api/link/${linkId}`,
+        `/api/link/${linkId}`,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
