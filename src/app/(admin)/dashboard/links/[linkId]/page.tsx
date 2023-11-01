@@ -1,5 +1,6 @@
 "use client";
 
+import { endpoint } from "@/lib/constants/endpoint";
 import { DrizzleLink, DrizzleLog } from "@/lib/db/schema";
 import axios from "axios";
 import { useParams } from "next/navigation";
@@ -15,11 +16,7 @@ const LinkDetailPage: FC = () => {
   const getLinkData = async (linkId: string) => {
     await axios
       .get<{ link: DrizzleLink; linkLogs: DrizzleLog[] }>(
-        `${
-          process.env.VERCEL_URL
-            ? "https://bitshrt.vercel.app"
-            : "http://localhost:3000"
-        }/api/link/${linkId}`,
+        `${endpoint}/api/link/${linkId}`,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,

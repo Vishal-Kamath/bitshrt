@@ -6,12 +6,9 @@ import { MdContentCopy } from "react-icons/md";
 import { BsCheckLg } from "react-icons/bs";
 import { cn } from "@/utils/lib";
 import { dateFormater } from "@/utils/dateFormater";
+import { endpoint } from "@/lib/constants/endpoint";
 
 const LinkComponent: FC<{ link: DrizzleLink }> = ({ link }) => {
-  const endpoint = process.env.VERCEL_URL
-    ? "https://bitshrt.vercel.app"
-    : "http://localhost:3000";
-
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {

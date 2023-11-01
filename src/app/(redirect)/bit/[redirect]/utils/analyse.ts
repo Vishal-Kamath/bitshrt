@@ -5,7 +5,7 @@ import { NextRequest, userAgent } from "next/server";
 import { v4 as uuid } from "uuid";
 
 const analyse = async (link: DrizzleLink, req: NextRequest) => {
-  const geo = process.env.VERCEL_URL ? req.geo : LOCALHOST_GEO;
+  const geo = process.env.VERCEL ? req.geo : LOCALHOST_GEO;
   const ua = userAgent(req);
 
   const logId = uuid();
