@@ -5,6 +5,8 @@ import UIInput2 from "@/components/ui/input2";
 import Modal from "@/components/ui/modal";
 import axios from "axios";
 import { FC, useState } from "react";
+import QRCodeComponent from "./qrcode";
+import { endpoint } from "@/lib/constants/endpoint";
 
 const GenerateLink: FC<{ fetchLinks: VoidFunction }> = ({ fetchLinks }) => {
   const [key, setKey] = useState("");
@@ -12,6 +14,9 @@ const GenerateLink: FC<{ fetchLinks: VoidFunction }> = ({ fetchLinks }) => {
   const [open, setOpen] = useState(false);
 
   const _submit = async () => {
+    if (!url.trim() || !key.trim()) return alert("Please fill all details");
+    if (key.length !== 6)
+      return alert("Shortened key must be a 6 characters word");
     await axios
       .post(
         "/api/link",
@@ -42,27 +47,30 @@ const GenerateLink: FC<{ fetchLinks: VoidFunction }> = ({ fetchLinks }) => {
         Generate
       </UIButton>
       <Modal
-        className="p-5 flex flex-col gap-3 w-full max-w-xl pt-12"
+        className="px-9 flex gap-9 items-center w-full max-w-xl py-12"
         open={open}
         closeModal={() => setOpen(false)}
       >
-        <UIInput2
-          id="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="Original URL"
-        />
+        <div className="flex w-full flex-col gap-3">
+          <UIInput2
+            id="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="Original URL"
+          />
 
-        <UIInput2
-          id="Key"
-          value={key}
-          onChange={(e) => setKey(e.target.value)}
-          placeholder="Shorten Key"
-        />
+          <UIInput2
+            id="Key"
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
+            placeholder="Shorten Key"
+          />
 
-        <UIButton onClick={_submit} variant="sky-contained">
-          Submit
-        </UIButton>
+          <UIButton onClick={_submit} variant="sky-contained">
+            Submit
+          </UIButton>
+        </div>
+        <QRCodeComponent link={`${endpoint}/bit/${key}`} className="max-h-36" />
       </Modal>
     </>
   );
