@@ -52,7 +52,7 @@ export const logs = mysqlTable("logs", {
     .notNull()
     .references(() => links.id),
   city: varchar("city", { length: 50 }).notNull(),
-  country: varchar("country", { length: 2 }).notNull(),
+  country: varchar("country", { length: 10 }).notNull(),
   region: varchar("region", { length: 10 }).notNull(),
   latitude: varchar("latitude", { length: 10 }).notNull(),
   longitude: varchar("longitude", { length: 10 }).notNull(),
