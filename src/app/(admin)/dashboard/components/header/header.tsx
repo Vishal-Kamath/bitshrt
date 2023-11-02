@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 const Header = async () => {
   const session = await getServerSession();
-  if (!session) redirect("/auth/sigin?error=UserNoFound");
+  if (!session) redirect("/auth/signin?error=UserNotFound");
 
   return (
     <header className="flex justify-between items-center px-vw py-4 border-b-1 border-gray-300">
