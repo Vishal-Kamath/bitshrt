@@ -5,14 +5,16 @@ import { NextRequest, userAgent } from "next/server";
 import { v4 as uuid } from "uuid";
 
 const analyse = async (link: DrizzleLink, req: NextRequest) => {
-  const geo = process.env.VERCEL ? req.geo : LOCALHOST_GEO;
+  const geo = process.env.VERCEL === "1" && req.geo ? req.geo : LOCALHOST_GEO;
+
+  const city = req.headers.get("x-vercel-ip-city");
   const ua = userAgent(req);
 
   const logId = uuid();
   await db.insert(logs).values({
     id: logId,
     linkId: link.id,
-    city: geo?.city || "Unknown",
+    city: city || "Unknown",
     country: geo?.country || "Unknown",
     latitude: geo?.latitude || "Unknown",
     longitude: geo?.longitude || "Unknown",
