@@ -7,6 +7,7 @@ import { BsCheckLg } from "react-icons/bs";
 import { cn } from "@/utils/lib";
 import { dateFormater } from "@/utils/dateFormater";
 import { endpoint } from "@/lib/constants/endpoint";
+import QRCodeComponent from "./qrcode";
 
 const LinkComponent: FC<{ link: DrizzleLink }> = ({ link }) => {
   const [copied, setCopied] = useState(false);
@@ -19,15 +20,9 @@ const LinkComponent: FC<{ link: DrizzleLink }> = ({ link }) => {
 
   return (
     <div className="bg-white leading-none rounded-lg border-1 border-gray-200 flex shadow-md px-4 py-6 gap-4">
-      <Image
-        src="/assets/logo.svg"
-        alt="Bitshrt"
-        className="fill-black w-10 h-10"
-        width={100}
-        height={100}
-      />
+      <QRCodeComponent link={`${endpoint}/bit/${link.key}`} />
 
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col gap-2">
         <div className="flex gap-3 items-center">
           <h3 className="text-blue-600 font-semibold">
             {endpoint}/bit/{link.key}
