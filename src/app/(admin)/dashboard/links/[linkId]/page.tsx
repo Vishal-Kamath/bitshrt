@@ -36,6 +36,7 @@ const LinkDetailPage: FC = () => {
     <main className="flex flex-col px-vw gap-6 pt-10">
       <div className="flex justify-between">
         <h2 className="font-semibold text-lg">Links - {link?.key}</h2>
+        <p>{linkLogs?.length} clicks</p>
       </div>
 
       <section className="flex flex-col gap-3">
